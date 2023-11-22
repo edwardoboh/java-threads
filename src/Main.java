@@ -1,18 +1,21 @@
 public class Main {
-    public static void main(String[] args) {
-       MyThread miniThread = new MyThread("Mini Thread");
-       miniThread.start();
-       System.out.println(miniThread.getName());
-    }
+    public static void main(String[] args){
+        System.out.println("Main thread start");
+       Thread thread = new Thread(){
+           public void run(){
+               System.out.println("...");
+               try{
+                   Thread.sleep(3000);
+               }catch(Exception error){
+                   System.out.println(error.getMessage());
+               }
+               System.out.println("Thread is now running");
+           }
+       };
 
-    private static class MyThread extends Thread {
-        MyThread(String name){
-            super(name);
-        }
+       thread.start();
 
-        public void run(){
-            System.out.println("Running inside my thread");
-        }
+        System.out.println("Main Thread Ends");
     }
 
 }
