@@ -1,21 +1,21 @@
 public class Main {
     public static void main(String[] args){
         System.out.println("Main thread start");
-       Thread thread = new Thread(){
-           public void run(){
-               System.out.println("...");
-               try{
-                   Thread.sleep(3000);
-               }catch(Exception error){
-                   System.out.println(error.getMessage());
+       Thread thread = new Thread(
+               () -> {
+                   System.out.println("Inner Thread Started");
+                   try{
+                       Thread.sleep(4000);
+                   }catch(Exception e){
+                       System.out.println(e.getMessage());
+                   }
+                   System.out.println("Inner Thread Ends");
                }
-               System.out.println("Thread is now running");
-           }
-       };
-
+       );
+       thread.setDaemon(true);  // Use this line if you want the second thread to end immediately the main thread exits
        thread.start();
 
-        System.out.println("Main Thread Ends");
+       System.out.println("Main Thread Ends");
     }
 
 }
